@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="container">
+        <h1>THỜI TRANG NỮ</h1>
+        <form id="frm">
+            <label>
+                Image of product: 
+                <input type="file" name="im-input" id="im-input">
+            </label>
+            <br>
+            <label>
+                Product Name:  
+                <input type="text" name="" id="pname">
+            </label>
+            <br>
+            <label>
+                New Price: 
+                <input type="text" name="nprice" id="nprice">
+            </label> 
+            <br>
+            <label>
+                Old Price:
+                <input type="text" name="oprice" id="oprice">
+            </label>
+            <br>
+            <label>
+                Type:
+                <input type="text" name="tp" id="tp">
+            </label>
+            <br>
+            <label>
+                Code:
+                <input type="text" name="cd" id="cd">
+            </label>
+            <br>
+            <button type="button" onclick="add()">Add</button>
+        </form>  
+
+        <div id="productList">
+                <div>
+                    <p>STYLE MAN</p>
+                    <div id="pro-nam"></div>
+                </div>
+                <div>
+                    <p>STYLE WOMEN</p>
+                    <div  id="pro-nu"></div>
+                </div>
+        </div>
+
+    </div>
+
+    <script>
+        function add() {
+            const image = document.getElementById('im-input').files[0];
+            const productName = document.getElementById('pname').value;
+            const newPrice = document.getElementById('nprice').value;
+            const oldPrice = document.getElementById('oprice').value;
+            const type = document.getElementById('tp').value;
+            const code = document.getElementById('cd').value;
+
+            let imageURL = '';
+            if (image) {
+                imageURL = URL.createObjectURL(image);
+            }
+            var productCard = `
+                <div class="card">
+                    <img src="${imageURL}" class="card-img-top" alt="Hình sản phẩm">
+                    <div class="card-body">
+                        <h5 class="card-title">${productName}</h5>
+                        <p class="card-text">Giá mới: ${newPrice} VND</p>
+                        <p class="card-text" style="text-decoration: line-through;">Giá cũ: ${oldPrice} VND</p>
+                        <p class="card-text">Loại: ${type}</p>
+                        <p class="card-text">Mã sản phẩm: ${code}</p>
+                    </div>
+                </div>`;
+            
+
+            const pronam=document.getElementById("pro-nam");
+            const pronu=document.getElementById("pro-nu");
+
+            if (type==="nam"){
+                pronam.innerHTML+=productCard;
+            }else{
+                pronu.innerHTML+=productCard;
+            }
+
+            // document.getElementById("productList").innerHTML += productCard;
+
+            document.getElementById('frm').reset();
+}
+    </script>
+</body>
+</html>
